@@ -34,38 +34,38 @@ pipeline {
                 }
              }
          }
-         stage('Publish to Nexus') {
-             steps {
-                 withCredentials([usernamePassword(
-                     credentialsId: 'nexus-creds',
-                     usernameVariable: 'NEXUS_USER',
-                     passwordVariable: 'NEXUS_PASS'
-                 )]) {
-                     sh """
-                     mkdir -p ~/.m2
+       stage('Publish to Nexus') {
+           steps {
+               withCredentials([usernamePassword(
+                   credentialsId: 'nexus-creds',
+                   usernameVariable: 'NEXUS_USER',
+                   passwordVariable: 'NEXUS_PASS'
+               )]) {
+                   sh '''
+                       mkdir -p ~/.m2
 
-                     cat > ~/.m2/settings.xml <<EOF
-                     <settings>
-                       <servers>
-                         <server>
-                           <id>nexus-snapshots</id>
-                           <username>${NEXUS_USER}</username>
-                           <password>${NEXUS_PASS}</password>
-                         </server>
-                         <server>
-                           <id>nexus-releases</id>
-                           <username>${NEXUS_USER}</username>
-                           <password>${NEXUS_PASS}</password>
-                         </server>
-                       </servers>
-                     </settings>
-                     EOF
+                       cat > ~/.m2/settings.xml <<EOF
+<settings>
+  <servers>
+    <server>
+      <id>nexus-snapshots</id>
+      <username>${NEXUS_USER}</username>
+      <password>${NEXUS_PASS}</password>
+    </server>
+    <server>
+      <id>nexus-releases</id>
+      <username>${NEXUS_USER}</username>
+      <password>${NEXUS_PASS}</password>
+    </server>
+  </servers>
+</settings>
+EOF
 
-                     mvn deploy -DskipTests
-                     """
-                 }
-             }
-         }
+                       mvn deploy -DskipTests
+                   '''
+               }
+           }
+       }
 
     }
 }
