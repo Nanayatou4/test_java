@@ -9,7 +9,8 @@ pipeline {
             SONAR_TOKEN = credentials('SONAR_TOKEN')
     }
 
-   /* stages {
+  stages {
+    /*
         stage('Setup Maven Settings') {
             steps {
                 withCredentials([usernamePassword(
