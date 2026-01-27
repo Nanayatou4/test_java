@@ -44,9 +44,9 @@ pipeline {
                     passwordVariable: 'NEXUS_PASS'
                 )]) {
                     sh(script: """
-                        mkdir -p ~/.m2
+mkdir -p ~/.m2
 
-                        cat > ~/.m2/settings.xml <<EOF
+cat > ~/.m2/settings.xml <<EOF
 <settings>
   <servers>
     <server>
@@ -63,8 +63,8 @@ pipeline {
 </settings>
 EOF
 
-                        mvn deploy -DskipTests
-                    """, returnStdout: false)
+mvn deploy -DskipTests
+""", returnStdout: false)
                 }
             }
         }
