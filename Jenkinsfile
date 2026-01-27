@@ -10,7 +10,7 @@ pipeline {
     }
 
   stages {
-    /*
+
         stage('Setup Maven Settings') {
             steps {
                 withCredentials([usernamePassword(
@@ -19,12 +19,10 @@ pipeline {
                     passwordVariable: 'NEXUS_PASS'
                 )]) {
                     sh '''
-                        echo "Username: $NEXUS_USER"
-                        echo "Password length: ${#NEXUS_PASS}"
                         mkdir -p ~/.m2
                         rm -f ~/.m2/settings.xml
 
-                        cat > ~/.m2/settings.xml <<'EOF'
+                        cat > ~/.m2/settings.xml <<EOF
 <settings>
   <servers>
     <server>
@@ -43,7 +41,7 @@ EOF
                     '''
                 }
             }
-        }*/
+        }
 
         stage('Compile') {
             steps {
